@@ -47,50 +47,46 @@ int main(void)
         /*Read Status Of Switch Zero*/
         if (Switch0_Read() == 1)
         {
-            if ((Led1_State == 0) && (Led2_State == 0))
-            {
-                Button0_First = 1;
-            }
             if ((Led1_State == 0) || (Led2_State == 0))
             {
+                if ((Led1_State == 0) && (Led2_State == 0))
+                {
+                    Button0_First = 1;
+                }
                 Led0_State = 1;
                 GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, GPIO_PIN_3);
             }
             else
             {
-                if (Button0_First == 1)
-                {
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);
-                    Led0_State = 0;
-                    Button0_First = 0;
-                }
                 if (Button1_First == 1)
                 {
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x0);
-                    Led1_State = 0;
                     Button1_First = 0;
                     Button2_First = 1;
+
+                    /*Turn off Led 1*/
+                    Led1_State = 0;
+                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x0);
                 }
-                if (Button2_First == 1)
+                else if (Button2_First == 1)
                 {
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x0);
-                    Led2_State = 0;
-                    Button2_First = 0 ;
+                    Button2_First = 0;
                     Button1_First = 1;
+
+                    /*Turn Off led2*/
+                    Led2_State = 0;
+                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x0);
                 }
-                Led0_State = 1;
-                GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, GPIO_PIN_3);
             }
         }
         /*Read Status OF Switch One*/
         if (Switch1_Read() == 1)
         {
-            if ((Led0_State == 0) && (Led2_State == 0))
-            {
-                Button1_First = 1;
-            }
             if ((Led0_State == 0) || (Led2_State == 0))
             {
+                if ((Led0_State == 0) && (Led2_State == 0))
+                {
+                    Button1_First = 1;
+                }
                 Led1_State = 1;
                 GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, GPIO_PIN_2);
             }
@@ -98,37 +94,31 @@ int main(void)
             {
                 if (Button0_First == 1)
                 {
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);
-                    Led0_State = 0;
                     Button0_First = 0;
                     Button2_First = 1;
+                    /*Turn Off Led 0*/
+                    Led0_State = 0;
+                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);
                 }
-                if (Button1_First == 1)
+                else if (Button2_First == 1)
                 {
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x0);
-                    Led1_State = 0;
-                    Button1_First = 0;
-                }
-                if (Button2_First == 1)
-                {
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x0);
-                    Led2_State = 0;
                     Button2_First = 0;
                     Button0_First = 1;
+                    /*Turn Off led 2*/
+                    Led2_State = 0;
+                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x0);
                 }
-                Led1_State = 1;
-                GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, GPIO_PIN_2);
             }
         }
         /*Read Status Of Switch Two*/
         if (Switch2_Read() == 1)
         {
-            if ((Led0_State == 0) && (Led1_State == 0))
-            {
-                Button2_First = 1;
-            }
             if ((Led0_State == 0) || (Led1_State == 0))
             {
+                if ((Led0_State == 0) && (Led1_State == 0))
+                {
+                    Button2_First = 1;
+                }
                 Led2_State = 1;
                 GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, GPIO_PIN_1);
             }
@@ -136,26 +126,22 @@ int main(void)
             {
                 if (Button0_First == 1)
                 {
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);
-                    Led0_State = 0;
                     Button0_First = 0;
                     Button1_First = 1;
+
+                    /*Turn Off Led 0*/
+                    Led0_State = 0;
+                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);
                 }
-                if (Button1_First == 1)
+                else if (Button1_First == 1)
                 {
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x0);
-                    Led1_State = 0;
                     Button1_First = 0;
                     Button0_First = 1;
+                    /*Turn Off Led1*/
+                    Led1_State = 0;
+                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x0);
                 }
-                if (Button2_First == 1)
-                {
-                    GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x0);
-                    Led2_State = 0;
-                    Button2_First = 0;
-                }
-                Led2_State = 1;
-                GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, GPIO_PIN_1);
+
             }
         }
 
